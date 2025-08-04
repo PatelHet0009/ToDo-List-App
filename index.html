@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!-- 🌙 Theme Toggle Button -->
+    <button id="theme-toggle">🌙 Dark Mode</button>
+
     <div class="container">
         <h1>📝 My To-Do List</h1>
         <div class="input-section">
@@ -29,8 +32,31 @@
         <ul id="taskList"></ul>
     </div>
 
-<!--Linked a Script File-->
-  <script src="script.js"></script>
+  <!-- Theme Toggle Script -->
+  <script>
+    const toggleButton = document.getElementById("theme-toggle");
 
+    toggleButton.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+
+      if (document.body.classList.contains("dark-mode")) {
+        toggleButton.textContent = "☀️ Light Mode";
+      } else {
+        toggleButton.textContent = "🌙 Dark Mode";
+      }
+
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        toggleButton.textContent = "☀️ Light Mode";
+      }
+    });
+  </script>
+
+  <!-- Your existing script -->
+  <script src="script.js"></script>
 </body>
 </html>
